@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss.log-access</groupId>
+        <artifactId>log-access-parent</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.jboss.log-access</groupId>
+    <artifactId>log-access-service-jax-rs</artifactId>
+    <version>0.1-SNAPSHOT</version>
+
+    <name>EAP Log Access Service JAX-RS</name>
+    <description/>
+
+    <packaging>war</packaging>
+
+    <properties>
+        <version.httpclient>4.4</version.httpclient>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpclient}</version>
+         </dependency>
+        
+    </dependencies>
+
+    <build>
+        <finalName>service-jaxrs</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
