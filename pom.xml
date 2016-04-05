@@ -17,7 +17,7 @@
     </properties>
 
     <modules>
-        <module>service-jaxrs</module>
+        <module>logaccess-jaxrs</module>
     </modules>
 
     <dependencyManagement>

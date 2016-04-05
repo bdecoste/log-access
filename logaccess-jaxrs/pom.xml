@@ -40,7 +40,7 @@
     </dependencies>
 
     <build>
-        <finalName>service-jaxrs</finalName>
+        <finalName>logaccess-jaxrs</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
