@@ -123,25 +123,23 @@ public class Client {
     public HttpClient createHttpClient_AcceptsUntrustedCerts() throws Exception {
         HttpClientBuilder b = HttpClientBuilder.create();
      
-        // setup a Trust Strategy that allows all certificates.
-        //
-        //SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-        //    public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-        //        return true;
-        //    }
-        //}).build();
-        //b.setSslcontext( sslContext);
+        SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+            public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                return true;
+            }
+        }).build();
+        b.setSslcontext( sslContext);
      
-        //HostnameVerifier hostnameVerifier = SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+        HostnameVerifier hostnameVerifier = SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
      
-        //SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslContext, hostnameVerifier);
-        //Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-        //        .register("http", PlainConnectionSocketFactory.getSocketFactory())
-        //        .register("https", sslSocketFactory)
-        //        .build();
+        SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslContext, hostnameVerifier);
+        Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.getSocketFactory())
+                .register("https", sslSocketFactory)
+                .build();
      
-        //PoolingHttpClientConnectionManager connMgr = new PoolingHttpClientConnectionManager( socketFactoryRegistry);
-        //b.setConnectionManager( connMgr);
+        PoolingHttpClientConnectionManager connMgr = new PoolingHttpClientConnectionManager( socketFactoryRegistry);
+        b.setConnectionManager( connMgr);
      
         HttpClient client = b.build();
         return client;
